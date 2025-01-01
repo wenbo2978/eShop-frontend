@@ -1,7 +1,7 @@
 import React from 'react'
 import Img from '../../assets/hero/watch.png'
 import Button from '../Shared/Button'
-import { Link } from 'react-router-dom'
+import { Link} from 'react-router-dom'
 
 const product = {
   name: "watch",
@@ -12,6 +12,7 @@ const product = {
 }
 
 export default function ProductItem() {
+
   return (
     <Link to={'/product-detail'} className='grid grid-cols-3 gap-3 bg-white dark:bg-gray-800 shadow-sm hover:shadow-md transition-shadow rounded-lg'>
       <div className='overflow-hidden bg-gray-50 rounded-lg'>

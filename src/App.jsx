@@ -22,6 +22,7 @@ import SignUp from "./pages/SignUp.jsx";
 import Cart from "./pages/Cart.jsx";
 import ProductDetail from "./pages/ProductDetail.jsx";
 import ProductsList from "./pages/ProductsList.jsx";
+import PlaceOrder from "./pages/PlaceOrder.jsx";
 
 const App = () => {
   //console.log('222222222');
@@ -52,6 +53,7 @@ const App = () => {
           <Route path="/cart" element={<Cart/>}/>
           <Route path="/product-detail" element={<ProductDetail/>}/>
           <Route path="/product-list" element={<ProductsList/>}/>
+          <Route path="/place-order" element={<PlaceOrder/>}/>
         </Routes>
         <Partners />
         <Footer />
