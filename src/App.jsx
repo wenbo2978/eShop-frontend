@@ -23,6 +23,8 @@ import Cart from "./pages/Cart.jsx";
 import ProductDetail from "./pages/ProductDetail.jsx";
 import ProductsList from "./pages/ProductsList.jsx";
 import PlaceOrder from "./pages/PlaceOrder.jsx";
+import AddProduct from "./pages/AddProduct.jsx";
+import UpdateProduct from "./pages/UpdateProduct.jsx";
 
 const App = () => {
   //console.log('222222222');
@@ -54,6 +56,8 @@ const App = () => {
           <Route path="/product-detail" element={<ProductDetail/>}/>
           <Route path="/product-list" element={<ProductsList/>}/>
           <Route path="/place-order" element={<PlaceOrder/>}/>
+          <Route path="/add-product" element={<AddProduct/>} />
+          <Route path="/update-product" element={<UpdateProduct/>} />
         </Routes>
         <Partners />
         <Footer />
