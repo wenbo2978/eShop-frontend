@@ -1,19 +1,53 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ProductItem from '../components/Products/ProductItem'
 import { Link, useNavigate } from 'react-router-dom'
 import Button from '../components/Shared/Button';
 
 const list = [
   1, 2, 3, 4, 5, 6
-]
+];
 
 export default function ProductsList() {
   const [user, setUser] = useState('admin');
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  useEffect(() => {
+    const handleGetAllProducts = async () => {
+      try{
+        setLoading(true);
+        setError(null);
+        console.log('st');
+        const res = await fetch("http://localhost:9191/api/v1/products/all");
+        const data = await res.json();
+        if(data.success == false){
+          setError(data.message);
+          setLoading(false);
+        }else{
+          console.log(data.data);
+          setProducts(data.data);
+          setLoading(false);
+        }
+        
+      }catch(err){
+        setLoading(false);
+        setError(err);
+      }
+    }
+    handleGetAllProducts();
+  }, []);
   const navigate = useNavigate();
+
+  
 
   const handleUpdate = () => {
     navigate('/update-product');
   }
+
+  if(loading)
+    return <div className='max-w-4xl mx-auto p-5'>
+      <p className='text-3xl font-extrabold'>Loading...</p>
+    </div>
 
   return (
       
@@ -34,14 +68,14 @@ export default function ProductsList() {
         </div>
       }
       {
-        list.map((data, index) => (
+        products && products.length > 0 && list.map((data, index) => (
           <div key={index} className='flex md:flex-row flex-col gap-2'>
             
             <div className='flex flex-row gap-1'>
               {
                 user == 'admin' && <input type='checkbox'/>
               }
-              <ProductItem/>
+              <ProductItem productItem={products[0]}/>
             </div>
             
             {

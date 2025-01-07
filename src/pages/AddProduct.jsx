@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Button from '../components/Shared/Button';
 
 export default function AddProduct() {
   const [newCategory, setNewCategory] = useState(false);
+  
   const handleSubmit = (ev) => {
     ev.preventDefault();
     console.log('submit');
