@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { FaCaretDown, FaCartShopping } from 'react-icons/fa6'
 import { IoMdSearch } from 'react-icons/io'
 import DarkMode from './DarkMode'
 import { Link } from 'react-router-dom';
+import { UserContexts } from '../../contexts/UserContexts';
 
 const MenuLinks = [
   {
@@ -45,6 +46,7 @@ const DropdownLinks = [
   },
 ];
 export default function Navbar() {
+  const {user} = useContext(UserContexts);
   return (
     <div className='bg-white dark:bg-gray-900
       dark:text-white duration-200 relative 
@@ -120,9 +122,14 @@ export default function Navbar() {
                 '/>
             </div>
             {/**Sign in */}
-            <Link to={'/sign-in'}>
-                <p className='text-slate-700 hover:underline dark:text-gray-400'>Sign in</p>
-            </Link>
+            {
+              user ? 
+                <Link to={'/profile'} className='w-[35px] h-[35px] bg-slate-700 text-white text-sm rounded-full p-1 flex justify-center items-center font-bold dark:border-slate-400 dark:border-2'>WC</Link> : 
+                <Link to={'/sign-in'}>
+                  <p className='text-slate-700 hover:underline dark:text-gray-400'>Sign in</p>
+                </Link>
+              
+            }
             {/**Order Button section */}
             <Link to={'/cart'} className='relative p-3'>
               <FaCartShopping 

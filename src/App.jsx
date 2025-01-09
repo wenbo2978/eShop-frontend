@@ -25,6 +25,8 @@ import ProductsList from "./pages/ProductsList.jsx";
 import PlaceOrder from "./pages/PlaceOrder.jsx";
 import AddProduct from "./pages/AddProduct.jsx";
 import UpdateProduct from "./pages/UpdateProduct.jsx";
+import UserContextProvider from "./contexts/UserContexts.jsx";
+import Profile from "./pages/Profile.jsx";
 
 const App = () => {
   //console.log('222222222');
@@ -45,24 +47,27 @@ const App = () => {
   }, []);
 
   return (
-    <div className="bg-white dark:bg-gray-900 dark:text-white duration-200 overflow-hidden">
-      <BrowserRouter>
-        <Navbar handleOrderPopup={handleOrderPopup} />
-        <Routes>
-          <Route index element={<Home/>}/>
-          <Route path="/sign-in" element={<SignIn/>}/>
-          <Route path="/sign-up" element={<SignUp/>}/>
-          <Route path="/cart" element={<Cart/>}/>
-          <Route path="/product-detail/:id" element={<ProductDetail/>}/>
-          <Route path="/product-list" element={<ProductsList/>}/>
-          <Route path="/place-order" element={<PlaceOrder/>}/>
-          <Route path="/add-product" element={<AddProduct/>} />
-          <Route path="/update-product" element={<UpdateProduct/>} />
-        </Routes>
-        <Partners />
-        <Footer />
-      </BrowserRouter>
-    </div>
+    <UserContextProvider>
+      <div className="bg-white dark:bg-gray-900 dark:text-white duration-200 overflow-hidden">
+        <BrowserRouter>
+          <Navbar handleOrderPopup={handleOrderPopup} />
+          <Routes>
+            <Route index element={<Home/>}/>
+            <Route path="/sign-in" element={<SignIn/>}/>
+            <Route path="/sign-up" element={<SignUp/>}/>
+            <Route path="/cart" element={<Cart/>}/>
+            <Route path="/product-detail/:id" element={<ProductDetail/>}/>
+            <Route path="/product-list" element={<ProductsList/>}/>
+            <Route path="/place-order" element={<PlaceOrder/>}/>
+            <Route path="/add-product" element={<AddProduct/>} />
+            <Route path="/update-product" element={<UpdateProduct/>} />
+            <Route path="/profile" element={<Profile/>} />
+          </Routes>
+          <Partners />
+          <Footer />
+        </BrowserRouter>
+      </div>
+    </UserContextProvider>
   );
 };
 
