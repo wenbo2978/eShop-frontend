@@ -9,7 +9,7 @@ const list = [
 ];
 
 export default function ProductsList() {
-  const [user, setUser] = useState('admin');
+  //const [user, setUser] = useState('admin');
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -43,8 +43,9 @@ export default function ProductsList() {
 
   
 
-  const handleUpdate = () => {
-    navigate('/update-product');
+  const handleUpdate = (data) => {
+    console.log(data);
+    navigate(`/update-product/${data.id}`);
   }
 
   if(loading)
@@ -71,14 +72,14 @@ export default function ProductsList() {
         </div>
       }
       {
-        products && products.length > 0 && list.map((data, index) => (
+        products && products.length > 0 && products.map((data, index) => (
           <div key={index} className='flex md:flex-row flex-col gap-2'>
             
             <div className='flex flex-row gap-1'>
               {
                 role == 'ROLE_ADMIN' && <input type='checkbox'/>
               }
-              <ProductItem productItem={products[0]}/>
+              <ProductItem productItem={data}/>
             </div>
             
             {
@@ -93,7 +94,7 @@ export default function ProductsList() {
                     text={"Update"} 
                     textColor={'text-white'} 
                     bgColor={'bg-green-600'}
-                    handler={handleUpdate}
+                    handler={() => handleUpdate(data)}
                   />
                   <Button 
                     text={"Replenish"} 

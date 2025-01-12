@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import UserInfo from '../components/UserInfo/UserInfo';
+import OrderList from '../components/OrderHistory/OrderList';
 
 export default function Profile() {
   const [section, setSection] = useState(0);
@@ -26,7 +27,7 @@ export default function Profile() {
         section == 0 && <UserInfo/>
       }
       {
-        section == 1 && 'Order'
+        section == 1 && <OrderList/>
       }
     </div>
   )

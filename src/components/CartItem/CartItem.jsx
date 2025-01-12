@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import { BiRadio } from 'react-icons/bi'
-
+import Img from '../../assets/hero/watch.png'
 const deliveryDate = [
   "Tuesday, Jan 7",
   "Sunday, Jan 4",
@@ -17,14 +16,14 @@ export default function CartItem({Item}) {
         <div>
           <img 
             alt='img'
-            src={Item.img}
+            src={Img}
             className='w-full h-[200px] overflow-hidden'
           />
         </div>
         <div className='col-span-2 grid grid-cols-2'>
           <div className='flex flex-col mt-5 gap-2'>
             <p className='font-bold text-lg'>{Item.name}</p>
-            <p>Price:&nbsp;${Item.price}</p>
+            <p>Price:&nbsp;${Item.unitPrice}</p>
             <p>Quantity:&nbsp;{Item.quantity}</p>
             <div className='flex flex-row gap-2 items-center'>
               <p className='hover:underline cursor-pointer hover:text-red-600'>Delete</p>

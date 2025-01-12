@@ -1,16 +1,18 @@
 import React from 'react'
 import Button from '../Shared/Button'
+import { useNavigate } from 'react-router-dom'
 
 
 
-export default function OrderSummary() {
+export default function OrderSummary({totalAmount}) {
+  const naviagte = useNavigate();
   return (
     <div className='w-full flex flex-col p-2 gap-2 my-auto'>
       <p className='font-extrabold text-[20px]'>Order Summary</p>
       <div className='w-full flex flex-col p-4 gap-2'>
         <div className='flex flex-row justify-between'>
           <p>Item:</p>
-          <p>$365.1</p>
+          <p>${totalAmount}</p>
         </div>
         <div className='flex flex-row justify-between'>
           <p>Shipping & handling:</p>
@@ -31,6 +33,7 @@ export default function OrderSummary() {
         <Button 
           bgColor={"bg-yellow-400"}
           text={"Place your order"}
+          handler={() => naviagte('/place-order')}
         />
       </div>
     </div>

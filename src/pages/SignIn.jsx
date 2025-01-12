@@ -12,7 +12,7 @@ const SignIn = () => {
   const handleSubmit = async (e)=>{
     e.preventDefault();
     try{
-      setEmail(null);
+      setError(null);
       //add proxy in vite.config.js
       const res = await fetch('http://localhost:9191/api/v1/auth/login', {
         method: 'POST',

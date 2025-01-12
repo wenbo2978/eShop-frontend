@@ -3,6 +3,7 @@ import Img from '../assets/hero/watch.png'
 import Img2 from '../assets/hero/headphone.png'
 import Button from '../components/Shared/Button';
 import { useNavigate, useParams } from 'react-router-dom';
+import { utilityGetToken } from '../utility/sharedFun';
 
 const product_mock = {
   name: "watch",
@@ -23,6 +24,9 @@ export default function ProductDetail() {
   const [product, setProduct] = useState();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [imgSrc, setImgSrc] = useState([]);
+  const [errorCart, setErrorCart] = useState();
+  const [quantity, setQuantity] = useState(1);
   
   useEffect(() => {
     const handleGetProduct = async () => {
@@ -49,6 +53,26 @@ export default function ProductDetail() {
 
     handleGetProduct();
   }, []);
+
+  const handleAddToCart = async () => {
+    const token = await utilityGetToken();
+    console.log(quantity);
+    console.log(product.id);
+    try{
+      setErrorCart(null);
+      const res = await fetch(`http://localhost:9191/api/v1/cartItems/item/add?productId=${product.id}&quantity=${quantity}`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }
+      });
+      console.log(res);
+      const data = await res.json();
+      console.log(data);
+    }catch(err){
+      setErrorCart(err)
+    }
+  }
 
   
 
@@ -106,7 +130,10 @@ export default function ProductDetail() {
               <p className='text-[30px] font-semibold'>{product.price}</p>
             </div>
             <div>
-            <select name="quantity" id="1" className='border-2 w-[120px] p-1 rounded-lg dark:bg-black'>
+            <select 
+              name="quantity" id="1" 
+              onChange={ev => setQuantity(ev.target.value)}
+              className='border-2 w-[120px] p-1 rounded-lg dark:bg-black'>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -115,6 +142,7 @@ export default function ProductDetail() {
             <div>
               <Button bgColor={'bg-yellow-300 w-[160px]'} text={'Add to cart'}
                 textColor={'white'}
+                handler={handleAddToCart}
               />
             </div>
             <div>
